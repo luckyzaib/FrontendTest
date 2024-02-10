@@ -12,7 +12,7 @@ const validateEntries = (
     let message=''
   entries.every(([key, val]) => {
     if (isNotANumber(Number(key)))
-       {console.log('key', key)
+       {
          message= "Some key is not an integer", isError= true 
     return false};
     if (isNotANumber(val))
