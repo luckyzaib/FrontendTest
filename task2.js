@@ -9,14 +9,16 @@
 // the role is neither admin nor client;
 // there are at least two active sessions and all of the active sessions last at least 8 hours.
 
-
-
 db.users.find({
-    "mail": {  $text: {
-        $search: '@example.org'} }, 
-    "lastLogin.coord.0": { $gte: -90, $lte: 0 }, 
-    "lastLogin.coord.1": { $gte: -180, $lte: 0 }, 
-    "unsuccessfulAttempts": { $gte: 1 }, 
-    "role": { $nin: ["admin", "client"] }, 
-    $where: "this.activeSessions && this.activeSessions.length >= 2 && this.activeSessions.every(session => session.duration >= 8)"
-  })
+  mail: {
+    $text: {
+      $search: "@example.org",
+    },
+  },
+  "lastLogin.coord.0": { $gte: -90, $lte: 0 },
+  "lastLogin.coord.1": { $gte: -180, $lte: 0 },
+  unsuccessfulAttempts: { $gte: 1 },
+  role: { $nin: ["admin", "client"] },
+  $where:
+    "this.activeSessions && this.activeSessions.length >= 2 && this.activeSessions.every(session => session.duration >= 8)",
+});
